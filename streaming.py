@@ -28,10 +28,10 @@ class listener(StreamListener):
 if __name__ == '__main__':
 
 	FO = open("twitter_data.txt","w")
-	l = StdOutListener()
+	lis = StdOutListener()
 	authHandler = OAuthHandler(consumer_key, consumer_secret)
 	authHandler.set_access_token(access_token, access_token_secret)
-	stream = Stream(authHandler, l)
+	stream = Stream(authHandler, lis)
 	stream.filter(track=['knitting', 'crochet', 'cross stitch', 'sewing', 'diy'])
 	#clearly I am using crafting keywords here, change them to what you need them to be
 	
