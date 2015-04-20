@@ -16,22 +16,22 @@ access_token_secret = "your access token secret goes here"
 consumer_key = "your consumer key goes here"
 consumer_secret = "your consumer secret goes here"
 
-class StdOutListener(StreamListener):
-	def on_data(self, data):
-		print data
-		FO.write(data)
+class listener(StreamListener):
+	def tweets(self, tweets):
+		print(tweets)
+		FO.write(tweets)
 		return True
 
-	def on_error(self, status):
-		print status
+	def check_for_error(self, status):
+		print(status)
 
 if __name__ == '__main__':
-	
+
 	FO = open("twitter_data.txt","w")
 	l = StdOutListener()
-	auth = OAuthHandler(consumer_key, consumer_secret)
-	auth.set_access_token(access_token, access_token_secret)
-	stream = Stream(auth, l)
+	authHandler = OAuthHandler(consumer_key, consumer_secret)
+	authHandler.set_access_token(access_token, access_token_secret)
+	stream = Stream(authHandler, l)
 	stream.filter(track=['knitting', 'crochet', 'cross stitch', 'sewing', 'diy'])
 	#clearly I am using crafting keywords here, change them to what you need them to be
 	
